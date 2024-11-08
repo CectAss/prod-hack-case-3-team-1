@@ -16,7 +16,7 @@ class Event:
                      choice(EVENT_REASONS))
     
     def all(self): # Функция, возвращающая словарь из всех значений Event'a: Event().fill().all()~~{'spendings': 'asdad', 'date': 'qew', 'reason': 'qew'}
-        return {"if": self.id,
+        return {"id": self.id,
                 "spendings":self.spending,
                 "date":self.date,
                 "reason":self.reason}
