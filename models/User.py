@@ -10,4 +10,3 @@ class User(Base):
     username = Column(String, nullable=False)     # Столбец username, не может быть null
     password = Column(String,  nullable=False) # password not null
     login = Column(String, nullable=False)
-    
