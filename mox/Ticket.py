@@ -12,7 +12,7 @@ class Ticket:
         self.home = home
         self.away = away
 
-    def fill(self, id): 
+    def fill(self, id): # FILL RICHARDS
         return Ticket(id, 
                       choice(TICKET_SPENDINGS), 
                       choice(TICKET_DATES_ARIVE), 

@@ -10,7 +10,7 @@ class Event:
         self.reason = reason
 
     def fill(self, id): # Заполняет рандомными значениями из файла конфига переменную типа Event: Event().fill()==Заполненный Event
-        return Event(id,
+        return Event(id, # FILL RICHARDS
                      choice(EVENT_SPENDINGS), 
                      choice(EVENT_DATES), 
                      r = choice(EVENT_REASONS))
