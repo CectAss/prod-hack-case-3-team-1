@@ -14,12 +14,12 @@ class Ticket:
 
     def fill(self, id): # FILL RICHARDS
         return Ticket(id, 
-                      choice(TICKET_SPENDINGS), 
-                      choice(TICKET_DATES_ARIVE), 
-                      choice(TICKET_DATES_COMEBACK), 
+                      choice(SPENDINGS), 
+                      choice(DATES), 
+                      choice(DATES), 
                       choice(TICKET_RACES_ID), 
-                      choice(TICKET_HOMES), 
-                      choice(TICKET_AWAYS))
+                      choice(TICKETS), 
+                      choice(TICKETS))
     
     def all(self): 
         return {"id": self.id,

@@ -11,12 +11,12 @@ class Event:
 
     def fill(self, id): # Заполняет рандомными значениями из файла конфига переменную типа Event: Event().fill()==Заполненный Event
         return Event(id, # FILL RICHARDS
-                     choice(EVENT_SPENDINGS), 
-                     choice(EVENT_DATES), 
-                     r = choice(EVENT_REASONS))
+                     choice(SPENDINGS), 
+                     choice(DATES), 
+                     choice(EVENT_REASONS))
     
     def all(self): # Функция, возвращающая словарь из всех значений Event'a: Event().fill().all()~~{'spendings': 'asdad', 'date': 'qew', 'reason': 'qew'}
-        return {"if": self.id,
+        return {"id": self.id,
                 "spendings":self.spending,
                 "date":self.date,
                 "reason":self.reason}
