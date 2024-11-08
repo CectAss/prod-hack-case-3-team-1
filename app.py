@@ -5,10 +5,22 @@ app.secret_key = 'your_secret_key'  # Добавьте секретный клю
 
 accounts = []
 
-@app.route("/")
+
+@app.route('/')
 def index():
-    print(accounts)
-    return render_template("index.html")
+    if session.get('auth') == True:
+        return render_template("index.html")
+    else:
+        return render_template("info.html")#ЭТА ХУЙНЯ НЕ РЕБОТАЕТ, САЯТ ДОБАВЬ БЛЯТЬ
+
+
+
+
+
+
+
+
+
 
 
 
