@@ -7,7 +7,9 @@ accounts = []
 
 @app.route("/")
 def index():
+    print(accounts)
     return render_template("index.html")
+
 
 
 @app.route('/login')
