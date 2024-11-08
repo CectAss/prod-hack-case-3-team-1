@@ -14,16 +14,6 @@ def index():
         return render_template("info.html")#ЭТА ХУЙНЯ НЕ РЕБОТАЕТ, САЯТ ДОБАВЬ БЛЯТЬ
 
 
-
-
-
-
-
-
-
-
-
-
 @app.route('/login')
 def log():
     return render_template("login.html")
