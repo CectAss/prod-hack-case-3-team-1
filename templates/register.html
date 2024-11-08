@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+</head>
+<body>
+<h1>register</h1>
+<p>Введите Логин и пароль для регистарции</p>
+<form method="post" action="/reg">
+    <label>Введите ваш Логин:</label>
+    <input type="text" name="login" />
+    <label>Введите ваш Пароль:</label>
+    <input type="password" name="password" />
+    <label>Повторите ваш Пароль:</label>
+    <input type="password" name="double_password" />
+    <input type="submit" value="зарегистрироваться">
+    <p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+</form>
+</body>
+</html>
