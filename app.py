@@ -18,11 +18,6 @@ db = SQLAlchemy(app)
 def register():
     return render_template("register.html")
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect('/')
-
 
 @app.route('/')
 def index():
@@ -50,11 +45,6 @@ def login():
             return redirect('/')
 
     return redirect('/login')
-
-
-@app.route('/reg')
-def register():
-    return render_template("register.html")
 
 @app.route('/reg', methods=['POST'])
 def reg():
@@ -84,5 +74,5 @@ def logout():
     session.clear()
     return redirect('/')
 
-if __name__ == '__main__':
-    app.run(debug=True, port = 7000)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
