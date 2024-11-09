@@ -1,4 +1,4 @@
-from flask import Flask, session, redirect, request, render_template, abort
+from flask import Flask, session, redirect, request, render_template
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Добавьте секретный ключ для работы с сессиями
@@ -11,12 +11,13 @@ def index():
     if session.get('auth') == True:
         return render_template("index.html")
     else:
-        return render_template("info.html")#ЭТА ХУЙНЯ НЕ РЕБОТАЕТ, САЯТ ДОБАВЬ БЛЯТЬ
+        return render_template("info.html")
 
 
 @app.route('/login')
 def log():
     return render_template("login.html")
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -30,9 +31,11 @@ def login():
 
     return redirect('/login')
 
+
 @app.route('/reg')
 def register():
     return render_template("register.html")
+
 
 @app.route('/reg', methods=['POST'])
 def reg():
@@ -50,10 +53,12 @@ def reg():
     else:
         return "Пароли не сходятся, попробуйте снова."
 
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
