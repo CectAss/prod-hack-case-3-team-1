@@ -18,11 +18,6 @@ db = SQLAlchemy(app)
 def register():
     return render_template("register.html")
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect('/')
-
 
 @app.route('/')
 def index():
@@ -73,6 +68,11 @@ def reg():
     else:
         return "Пароли не сходятся, попробуйте снова."
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
+
