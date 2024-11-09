@@ -51,11 +51,6 @@ def login():
 
     return redirect('/login')
 
-
-@app.route('/reg')
-def register():
-    return render_template("register.html")
-
 @app.route('/reg', methods=['POST'])
 def reg():
     login = request.form['login']  # Изменено для получения логина
@@ -78,11 +73,6 @@ def reg():
     else:
         return "Пароли не сходятся, попробуйте снова."
 
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
