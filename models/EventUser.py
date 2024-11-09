@@ -1,8 +1,12 @@
-from sqlalchemy import Column, Integer, String, TIME
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, sessionmaker
 
-Base = declarative_base()
+DBSession = scoped_session(sessionmaker())
+class _Base(object):
+    query = DBSession.query_property()
 
+Base = declarative_base(cls=_Base)
 
 class User(Base):
     __tablename__ = 'event_user'  # Имя таблицы в базе данных
