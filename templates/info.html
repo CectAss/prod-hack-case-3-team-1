@@ -1,48 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Demo</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-      .custom-header {
-        background-color: black;
-        color: white;
-        padding: 10px;
-        text-align: center;
-      }
-      .custom-button {
-        background-color: black;
-        color: white;
-      }
-      .black-box {
-        background-color: black;
-        color: white;
-        padding: 20px;
-        margin: 10px;
-        text-align: center;
-        border-radius: 10px; /* Закругление углов */
-      }
+        body {
+            background-image: url(../static/back_info.png);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transform: scale(1.5); /* Увеличиваем масштаб на 150% */
+            transform-origin: top left; /* Начало трансформации */
+            width: 66.67%; /* Компенсация масштабирования для правильной работы ширины */
+            height: 66.67%; /* Компенсация масштабирования для правильной работы высоты */
+            overflow-x: hidden; /* Скрываем горизонтальную полосу прокрутки */
+        }
+        .header-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: white; /* Цвет текста */
+            text-align: center;
+            margin-top: 50px;
+        }
+        .register-button {
+            background-color: red;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 18px;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
     </style>
-  </head>
-  <body>
-    <div class="custom-header">
-      <h2>Супер Отель</h2>
+    <title>Супер Отель</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header-text">Следи за своими путешествиями</h1>
+        <a href="/reg" class="register-button">Регистрация</a>
     </div>
-
-    <div class="container text-center mt-5">
-      <h1>Информация о сайте</h1>
-      <a href="/reg" class="btn custom-button btn-lg mt-5">Для работы с продуктом требуется регистрация</a>
-      <div class="mt-5 d-flex justify-content-center">
-        <div class="black-box">с помощью этого сайта, вы не проебете свои лишние деньги на всякую хуйню</div>
-        <div class="black-box">он вам сообщит о всех проблемах вашей поездки</div>
-        <div class="black-box">так же укажет все твои проебаные деньги, лох ебаный</div>
-      </div>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>
