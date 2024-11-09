@@ -4,6 +4,7 @@ from models.User import User
 from sqlalchemy import *
 import dotenv
 import os
+from sqlalchemy.orm import sessionmaker
 
 
 app = Flask(__name__)
@@ -12,7 +13,7 @@ dotenv.load_dotenv()
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URL')
-db = SQLAlchemy(app)
+engine = create_engine('sqlite:///hakaton.db')
 
 @app.route('/reg')
 def register():
@@ -37,7 +38,11 @@ def log():
 def login():
     login = request.form['login']
     password = request.form['password']
-    accounts = db.session.execute(db.select(User)).scalars().all()
+
+    Session = sessionmaker(bind=engine)
+    session_db = Session()
+
+    accounts = session_db.execute(select(User)).scalars().all()
 
     for acc in accounts:
         if login == acc.login and password == str(acc.password):
@@ -53,7 +58,10 @@ def reg():
     double_password = request.form['double_password']
     username = request.form['name']
 
-    accounts = db.session.execute(db.select(User)).scalars().all()
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    accounts = session.execute(select(User)).scalars().all()
 
     if double_password == password:
         for acc in accounts:
@@ -62,8 +70,8 @@ def reg():
 
         new_user = User(login=login, password=password, username=username)  # Создаем нового пользователя
 
-        db.session.add(new_user)  # Добавляем его в сессию
-        db.session.commit()  # Сохраняем изменения в базе данных
+        session.add(new_user)  # Добавляем его в сессию
+        session.commit()  # Сохраняем изменения в базе данных
         return redirect('/')
     else:
         return "Пароли не сходятся, попробуйте снова."
