@@ -35,14 +35,26 @@
             margin-top: 50px;
         }
 
+        .button-container {
+            display: flex; /* Выравнивание кнопок в ряд */
+            gap: 20px; /* Промежуток между кнопками */
+        }
+
         .register-button {
             background-color: red;
             color: white;
             border-radius: 25px;
             padding: 10px 20px;
             font-size: 18px;
-            display: block;
-            margin: 20px 0; /* Убираем авто-маргин для centr */
+            width: 25%; /* Задаем ширину кнопки 1/4 страницы */
+            text-align: center; /* Выравниваем текст по центру кнопки */
+        }
+        .log-button {
+            background-color: #002137;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 18px;
             width: 25%; /* Задаем ширину кнопки 1/4 страницы */
             text-align: center; /* Выравниваем текст по центру кнопки */
         }
@@ -52,7 +64,10 @@
 <body>
 <div class="container">
     <h1 class="header-text">Следи за своими путешествиями</h1>
-    <a href="/reg" class="register-button header-text">Регистрация</a>
+    <div class="button-container">
+        <a href="/reg" class="register-button">Регистрация</a>
+        <a href="/login" class="log-button">Войти</a>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
