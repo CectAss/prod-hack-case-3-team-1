@@ -14,12 +14,7 @@ class _Base(object):
 
 Base = declarative_base(cls=_Base)
 
-app = Flask(__name__)
-dotenv.load_dotenv()
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URL')
-db = SQLAlchemy(app)
-
-class User(db.Model):
+class User(Base):
     __tablename__ = 'user'  # Имя таблицы в базе данных
 
     id = Column(Integer, primary_key=True)  # Столбец id, первичный ключ
