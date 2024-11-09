@@ -91,3 +91,6 @@ TICKETS = ["100 Main St", "101 Oak Ave", "102 Maple Rd", "103 Pine Ct", "104 Ced
                 "187 Ember Dr", "188 Ash Way", "189 Coal Pl","190 Fire Rd", "191 Heat Ct", "192 Warm Blvd", 
                 "193 Cool St", "194 Breeze Ave", "195 Wind Rd", "196 Storm Ct", "197 Rain Blvd", 
                 "198 Snow St", "199 Frost Ln"]
+
+SERVER_MAIL_ADDRES = "syxapiki.team@mail.ru"
+SERVER_MAIL_PASSWORD = "cverXMP9vSrmHsD7QfKc"
