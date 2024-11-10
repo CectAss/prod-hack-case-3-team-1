@@ -8,9 +8,9 @@ class _Base(object):
 
 Base = declarative_base(cls=_Base)
 
-class HotelUser(Base):
-    __tablename__ = 'hotel_user'  # Имя таблицы в базе данных
+class HotelBook(Base):
+    __tablename__ = 'hotel_book'  # Имя таблицы в базе данных
 
     hotel_id = Column(Integer)
     user_id = Column(Integer)
-    date_in = Column(String)
+    date_in = Column()

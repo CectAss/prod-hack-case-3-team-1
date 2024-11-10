@@ -81,7 +81,9 @@ def index():
 
         for ticket_user in ticket_users:
             tickets = session_db.execute(select(Ticket(id=ticket_user.ticket_id))).scalars().all()
-            connected_elements['tickets'] = tickets
+            connected_elements['tickets'].append({
+                '
+            })
 
         for event_user in event_users:
             events = session_db.execute(select(Event(id=event_user.event_id))).scalars().all()
