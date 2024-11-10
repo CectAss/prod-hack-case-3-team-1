@@ -17,7 +17,7 @@ def event_fill(n):
     
     for event in event_arr:
 
-        a = e(spending=event.spending, reason=event.reason, date=None)
+        a = e(spending=event.spending, reason=event.reason, date=event.date)
         session_db.add(a)
         session_db.commit()
 
@@ -27,8 +27,7 @@ def ticket_fill(n):
     
     for ticket in ticket_arr:
 
-        a = t(id=ticket.id, price=ticket.spending, race_number=ticket.race_id, date_arrive=None, date_comeback=None, home=ticket.home, away=ticket.away)
+        a = t(price=ticket.spending, race_number=ticket.race_id, date_arrive=ticket.date_arrive, date_comeback=ticket.date_comeback, home=ticket.home, away=ticket.away)
         session_db.add(a)
         session_db.commit()
 
-ticket_fill(15)
