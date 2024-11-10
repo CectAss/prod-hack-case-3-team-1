@@ -145,3 +145,58 @@ ID поездки, для обращения в службу поддержки:
 С уважением,  
 SYXAPIKI.TEAM!
 """}
+
+HOTEL_NAMES = [
+    "Grand Hotel",
+    "Seaside Resort",
+    "Mountain View Inn",
+    "City Center Suites",
+    "Lakeside Lodge",
+    "Tropical Paradise Hotel",
+    "Elegant Escape",
+    "Cozy Cottage",
+    "Luxury Retreat",
+    "Heritage House",
+    "The Royal Plaza",
+    "Skyline Hotel",
+    "Sunset Beach Resort",
+    "Charming B&B",
+    "Urban Oasis",
+    "Countryside Inn",
+    "The Greenhouse Hotel",
+    "Ocean Breeze Suites",
+    "Classic Comfort Hotel",
+    "The Heritage Inn",
+    "Vista Del Mar Hotel",
+    "Paradise Point Resort",
+    "The Grand Palace",
+    "Serenity Spa Hotel",
+    "The Rustic Lodge",
+    "The Sapphire Hotel",
+    "Grove Park Inn",
+    "The Crystal Bay Hotel",
+    "Hilltop Haven",
+    "The Coastal Retreat",
+    "Riverside Inn",
+    "The Vintage Hotel",
+    "Palace of Dreams",
+    "The Garden Hotel",
+    "Sunrise Suites",
+    "The Majestic Hotel",
+    "Tranquil Waters Resort",
+    "The Ivy League Hotel",
+    "Bayfront Resort",
+    "The Art Deco Hotel",
+    "Mountain Ridge Lodge",
+    "The Boutique Hotel",
+    "Island Getaway Resort",
+    "The Velvet Room Hotel",
+    "Starlight Inn",
+    "The Oasis Hotel",
+    "Canyon View Lodge"
+]
+
+import random
+
+HOTEL_PRICES = [random.randint(15000, 120000) for _ in range(50)]
+

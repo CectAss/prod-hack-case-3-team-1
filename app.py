@@ -1,6 +1,8 @@
 from flask import Flask, session, redirect, request, render_template
 from flask_sqlalchemy import *
 from models.User import User
+from models.Hotel import Hotel
+from models.Ticket import Ticket
 from sqlalchemy import *
 import dotenv
 import os
@@ -19,6 +21,24 @@ engine = create_engine('sqlite:///hakaton.db')
 def register():
     return render_template("register.html")
 
+@app.route('/hotels_book', methods=['POST'])
+def hotels():
+    Session = sessionmaker(bind=engine)
+    session_db = Session()
+
+    hotels = session_db.execute(select(Hotel)).scalars().all()
+
+    return hotels
+
+@app.route('/tickets', methods=['POST'])
+def hotels():
+    Session = sessionmaker(bind=engine)
+    session_db = Session()
+
+    tickets = session_db.execute(select(Ticket)).scalars().all()
+
+    return tickets
+    
 
 @app.route('/')
 def index():
