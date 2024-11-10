@@ -21,7 +21,7 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     op.create_table(
         'ticket',
-        sa.Column('id', sa.String(), nullable=False),
+        sa.Column('id', sa.String(), nullable=False, autoincrement=True),
         sa.Column('race_number', sa.String()),
         sa.Column('date_arrive', sa.TIME()),
         sa.Column('date_comeback', sa.TIME()),
