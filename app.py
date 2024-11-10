@@ -2,7 +2,11 @@ from flask import Flask, session, redirect, request, render_template, url_for
 from flask_sqlalchemy import *
 from models.User import User
 from models.Hotel import Hotel
-# from models.Ticket import Ticket
+from models.Ticket import Ticket
+from models.TicketUser import TicketUser
+from models.HotelUser import HotelUser
+from models.EventUser import EventUser
+from models.Event import Event
 from sqlalchemy import *
 import dotenv
 import os
@@ -58,7 +62,37 @@ def hotels_book_accept():
 @app.route('/')
 def index():
     if session.get('auth') == True:
-        return render_template("index.html")
+        Session = sessionmaker(bind=engine)
+        session_db = Session()
+
+        user_login = session['login']
+
+        user = session_db.execute(select(User(login=user_login))).scalars().all()
+
+        ticket_users = session_db.execute(select(TicketUser(user_id=user.id))).scalars().all()
+        event_users = session_db.execute(select(EventUser(user_id=user.id))).scalars().all()
+        hotel_users = session_db.execute(select(HotelUser(user_id=user.id))).scalars().all()
+
+        connected_elements = {
+            'tickets' = [],
+            'hotels' = [],
+            ''
+            }
+
+        for ticket_user in ticket_users:
+            tickets = session_db.execute(select(Ticket(id=ticket_user.ticket_id))).scalars().all()
+            connected_elements['tickets'] = tickets
+
+        for event_user in event_users:
+            events = session_db.execute(select(Event(id=event_user.event_id))).scalars().all()
+            connected_elements['events'] = events
+
+        for hotel_user in hotel_users:
+            hotels = session_db.execute(select(Hotel(id=hotel_user.hotel_id))).scalars().all()
+            connected_elements['hotels'] = hotels
+
+
+        return render_template("index.html", connected_elements['hotels'][0])
     else:
         return render_template("info.html")
 
