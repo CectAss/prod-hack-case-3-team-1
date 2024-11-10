@@ -70,34 +70,62 @@ def index():
         user = session_db.execute(select(User(login=user_login))).scalars().all()
 
         ticket_users = session_db.execute(select(TicketUser(user_id=user.id))).scalars().all()
-        event_users = session_db.execute(select(EventUser(user_id=user.id))).scalars().all()
         hotel_users = session_db.execute(select(HotelUser(user_id=user.id))).scalars().all()
 
         connected_elements = {
-            'tickets' = [],
-            'hotels' = [],
-            ''
+            'tickets' : [],
+            'hotels' : [],
             }
 
         for ticket_user in ticket_users:
             tickets = session_db.execute(select(Ticket(id=ticket_user.ticket_id))).scalars().all()
-            connected_elements['tickets'].append({
-                '
-            })
 
-        for event_user in event_users:
-            events = session_db.execute(select(Event(id=event_user.event_id))).scalars().all()
-            connected_elements['events'] = events
+            for ticket in tickets:
+                connected_elements['tickets'].append({
+                    'price' : ticket.price,
+                    'home' :ticket.Home,
+                    'away' : ticket.away,
+                    'date_arrive' : ticket.date_arrive,
+                    'date_comeback' : ticket.date_comeback,
+                    'race_number' : ticket.race_number,
+                })
 
         for hotel_user in hotel_users:
             hotels = session_db.execute(select(Hotel(id=hotel_user.hotel_id))).scalars().all()
-            connected_elements['hotels'] = hotels
+            for hotel in hotels:
+                connected_elements['hotels'].append({
+                    'date_in' : hotel.date_in,
+                    'date_away' : hotel.date_away,
+                    'price' : hotel.price,
+                    'name' : hotel.name
+                })
 
 
         return render_template("index.html", connected_elements['hotels'][0])
     else:
         return render_template("info.html")
 
+
+@app.route('/hotels_book')
+def hotels():
+    Session = sessionmaker(bind=engine)
+    session_db = Session()
+
+    hotels = session_db.execute(select(Hotel)).scalars().all()
+
+    return render_template("hotels_bron.html", hotels=hotels)
+
+
+@app.route("/hotels_book_accept", methods=["POST"])
+def hotels_book_accept():
+    hotel_name = request.form["hotel"]
+    start_date = request.form["start"]
+    end_date = request.form["end"]
+    cost = request.form["cost"]
+
+    # МАКС ТУТ ВСЕ КИДАЕШЬ В БД СВЯЗКИ ПОЛЬЗОВАТЕЛЕЙ
+
+    return redirect(url_for('index'))
 
 
 @app.route('/login')
