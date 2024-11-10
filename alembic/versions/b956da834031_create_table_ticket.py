@@ -23,8 +23,8 @@ def upgrade() -> None:
         'ticket',
         sa.Column('id', sa.String(), nullable=False, autoincrement=True),
         sa.Column('race_number', sa.String()),
-        sa.Column('date_arrive', sa.TIME()),
-        sa.Column('date_comeback', sa.TIME()),
+        sa.Column('date_arrive', sa.String()),
+        sa.Column('date_comeback', sa.String()),
         sa.Column('price', sa.Integer),
         sa.Column('Home', sa.String()),
         sa.Column('away', sa.String())

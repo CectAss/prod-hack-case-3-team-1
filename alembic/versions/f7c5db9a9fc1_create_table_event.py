@@ -23,7 +23,7 @@ def upgrade() -> None:
         'event',
         sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True),
         sa.Column('spending', sa.Integer(), nullable=False),
-        sa.Column('date', sa.TIME(), nullable=False),
+        sa.Column('date', sa.String(), nullable=False),
         sa.Column('reason', sa.String(), nullable=False)
     )
 
