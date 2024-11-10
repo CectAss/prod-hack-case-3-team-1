@@ -1,64 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Бронирование отелей</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-      body {
-        color: white;
-        background-image: url(../static/nothing_wall.jpg);
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-    </style>
+    <meta charset="UTF-8">
+    <title>Book a Hotel</title>
+    <script>
+        function updatePrice() {
+            var select = document.getElementById("hotelSelect");
+            var priceDisplay = document.getElementById("priceDisplay");
+            var selectedIndex = select.selectedIndex;
+
+            
+            var price = select.options[selectedIndex].getAttribute("data-price");
+            priceDisplay.textContent = "Price per day: " + price + " Рублей"; 
+        }
+
+        function calculateCost() {
+            var select = document.getElementById("hotelSelect");
+            var selectedIndex = select.selectedIndex;
+            var price = parseFloat(select.options[selectedIndex].getAttribute("data-price"));
+
+            var startDate = new Date(document.getElementById("startDate").value);
+            var endDate = new Date(document.getElementById("endDate").value);
+            if (startDate && endDate) {
+                var days = (endDate - startDate) / (1000 * 60 * 60 * 24);
+                if (days > 0) {
+                    var totalCost = days * price;
+                    document.getElementById("totalCost").value = totalCost;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    <a href='/logout'>Выйти!</a>
-    <div class="menu">
-        <button><a type="button" class="btn btn-danger btn-sm" href="/">Главная</a></button>
-        <button><a type="button" class="btn btn-danger btn-sm" href="/nofications">Уведомления</a></button>
-        <button><a type="button" class="btn btn-danger btn-sm" href="/account/{{ id }}">Аккаунт</a></button>
-        <button><a type="button" class="btn btn-danger btn-sm" href="/logout">Выйти</a></button>
-    </div>
 
-    <h2>Бронирование отелей</h2>
-    <form method="POST">
-        <label for="hotel_name">Выберите отель:</label>
-        <input type="text" id="hotel_name" name="hotel_name" autocomplete="off" required>
-        <div id="suggestions" style="display:none;"></div>
+<h1>Choose a Hotel</h1>
+<form action="{{ url_for('hotels_book_accept') }}" method="post">
+    <label for="hotelSelect">Select a hotel:</label>
+    <select id="hotelSelect" name="hotel" onchange="updatePrice()" required>
+        <option value="">-- Select a hotel --</option>
+        {% for hotel in hotels %}
+            <option value="{{ hotel.name }}" data-price="{{ hotel.price_per_day }}">
+                {{ hotel.name }}
+            </option>
+        {% endfor %}
+    </select>
+    <span id="priceDisplay">Price per day: 0 currency</span>
 
-        <label for="price_per_day">Цена за сутки:</label>
-        <input type="number" id="price_per_day" name="price_per_day" required>
+    <br><br>
 
-        <label for="start_date">Дата начала (дд-мм-гггг):</label>
-        <input type="date" id="start_date" name="start_date" required>
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="start" onchange="calculateCost()" required>
+    
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="end" onchange="calculateCost()" required>
 
-        <label for="end_date">Дата окончания (дд-мм-гггг):</label>
-        <input type="date" id="end_date" name="end_date" required>
+    <input type="hidden" id="totalCost" name="cost" value="0">
+    
+    <button type="submit">Book Now</button>
+</form>
 
-        <button type="submit">Забронировать</button>
-    </form>
-
-    <script>
-      const hotels = ['Отель "Белград"', 'Гостиница "Форест Гамп"', 'S7 Airlines', 'Аэрофлот'];
-      $('#hotel_name').on('input', function() {
-          let input = $(this).val();
-          $('#suggestions').empty().show();
-          hotels.forEach(hotel => {
-              if (hotel.toLowerCase().includes(input.toLowerCase())) {
-                  $('#suggestions').append('<div>' + hotel + '</div>');
-              }
-          });
-      });
-      
-      $(document).on('click', '#suggestions div', function() {
-          $('#hotel_name').val($(this).text());
-          $('#suggestions').hide();
-      });
-    </script>
 </body>
 </html>
