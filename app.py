@@ -1,8 +1,8 @@
-from flask import Flask, session, redirect, request, render_template
+from flask import Flask, session, redirect, request, render_template, url_for
 from flask_sqlalchemy import *
 from models.User import User
 from models.Hotel import Hotel
-from models.Ticket import Ticket
+# from models.Ticket import Ticket
 from sqlalchemy import *
 import dotenv
 import os
@@ -21,24 +21,39 @@ engine = create_engine('sqlite:///hakaton.db')
 def register():
     return render_template("register.html")
 
-@app.route('/hotels_book', methods=['POST'])
+@app.route('/hotels_book')
 def hotels():
     Session = sessionmaker(bind=engine)
     session_db = Session()
 
+   
     hotels = session_db.execute(select(Hotel)).scalars().all()
 
-    return hotels
-
-@app.route('/tickets', methods=['POST'])
-def hotels():
-    Session = sessionmaker(bind=engine)
-    session_db = Session()
-
-    tickets = session_db.execute(select(Ticket)).scalars().all()
-
-    return tickets
     
+    hotels_with_cost = [{"name": hotel.name, "price_per_day": hotel.price} for hotel in hotels]
+
+    
+    return render_template("hotels_bron.html", hotels=hotels_with_cost)
+
+@app.route("/hotels_book_accept", methods=["POST"])
+def hotels_book_accept():
+    hotel_name = request.form["hotel"]
+    start_date = request.form["start"]
+    end_date = request.form["end"]
+    cost = request.form["cost"]
+
+    return redirect(url_for('index'))
+
+
+# @app.route('/tickets_book')
+# def hotels():
+#     Session = sessionmaker(bind=engine)
+#     session_db = Session()
+
+#     tickets = session_db.execute(select(Ticket)).scalars().all()
+
+#     return tickets
+# # @app.route("/hotels_book_accept", method=["POST"])
 
 @app.route('/')
 def index():
@@ -47,7 +62,7 @@ def index():
     else:
         return render_template("info.html")
 
-#@app.route('/api/count_journeys/<int:user_id>')
+
 
 @app.route('/login')
 def log():
@@ -103,4 +118,3 @@ def logout():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
-
