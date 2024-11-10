@@ -9,7 +9,7 @@ class _Base(object):
 Base = declarative_base(cls=_Base)
 
 
-class User(Base):
+class Event(Base):
     __tablename__ = 'event'  # Имя таблицы в базе данных
 
     id = Column(Integer, primary_key=True)  # Столбец id, первичный ключ
