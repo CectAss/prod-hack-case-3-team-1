@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book a Hotel</title>
+    <script>
+        function updatePrice() {
+            var select = document.getElementById("hotelSelect");
+            var priceDisplay = document.getElementById("priceDisplay");
+            var selectedIndex = select.selectedIndex;
+
+            
+            var price = select.options[selectedIndex].getAttribute("data-price");
+            priceDisplay.textContent = "Price per day: " + price + " $"; 
+        }
+
+        function calculateCost() {
+            var select = document.getElementById("hotelSelect");
+            var selectedIndex = select.selectedIndex;
+            var price = parseFloat(select.options[selectedIndex].getAttribute("data-price"));
+
+            var startDate = new Date(document.getElementById("startDate").value);
+            var endDate = new Date(document.getElementById("endDate").value);
+            if (startDate && endDate) {
+                var days = (endDate - startDate) / (1000 * 60 * 60 * 24);
+                if (days > 0) {
+                    var totalCost = days * price;
+                    document.getElementById("totalCost").value = totalCost;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1>Choose a Hotel</h1>
+<form action="{{ url_for('hotels_book_accept') }}" method="post">
+    <label for="hotelSelect">Select a hotel:</label>
+    <select id="hotelSelect" name="hotel" onchange="updatePrice()" required>
+        <option value="">-- Select a hotel --</option>
+        {% for hotel in hotels %}
+            <option value="{{ hotel.name }}" data-price="{{ hotel.price_per_day }}">
+                {{ hotel.name }}
+            </option>
+        {% endfor %}
+    </select>
+    <span id="priceDisplay">Price per day: 0 currency</span>
+
+    <br><br>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="start" onchange="calculateCost()" required>
+    
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="end" onchange="calculateCost()" required>
+
+    <input type="hidden" id="totalCost" name="cost" value="0">
+    
+    <button type="submit">Book Now</button>
+</form>
+
+</body>
+</html>
